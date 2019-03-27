@@ -13,11 +13,11 @@ public class SlidingWindowRateLimiter {
         this.storedPermits = maxPermits;
     }
 
-    public synchronized void acquire() {
+    public void acquire() {
         acquire(1);
     }
 
-    public void acquire(double permits) {
+    public synchronized void acquire(double permits) {
 
         long elapsedNanos = System.nanoTime() - lastRequest;
         double newPermits = Math.floor(elapsedNanos/refillRate);
